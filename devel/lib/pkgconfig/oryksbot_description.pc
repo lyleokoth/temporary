@@ -1,0 +1,8 @@
+prefix=/home/lyle/oryks_ws/devel
+
+Name: oryksbot_description
+Description: Description of oryksbot_description
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find oryksbot_control)/launch/oryksbot_joy.launch" />
+  <include file="$(find oryksbot_mapping)/launch/slam_gmapping.launch" />
+  <include file="$(find oryksbot_mapping)/launch/rviz.launch" />
+  <include file="$(find oryksbot_gazebo)/launch/warehouse_world.launch" />
+</launch>

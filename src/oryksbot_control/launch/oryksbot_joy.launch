@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="oryksbot_control" type="oryksbot_joy.py" name="joy_to_bot" />
+        
+    <node pkg="joy" type="joy_node" name="joy_node" />
+</launch>

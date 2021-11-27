@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find oryksbot_control)/launch/gazebo.launch" />
+    <include file="$(find oryksbot_control)/launch/oryksbot_joy.launch" />
+
+    <!--node pkg="bot_control" type="odom_pub3" name="odom_pub3" 
+    output="screen"/-->
+
+  <include file="$(find oryksbot_control)/launch/control.launch"/>  
+ 
+</launch>    

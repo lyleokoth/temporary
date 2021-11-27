@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>  
+    <!-- convert joint states to TF transforms for rviz, etc -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+        respawn="false" output="screen">
+    </node>
+    <node name="rviz" pkg="rviz" type="rviz" required="true" 
+        args="-d $(find oryksbot_mapping)/rviz/map.rviz"/>
+
+    <node pkg="tf" type="static_transform_publisher" name="laser" 
+    args="0 0 0 0 0 0  /base_footprint /laser  100 "/>
+
+    <include file="$(find rplidar_ros)/launch/rplidar.launch" />
+        
+</launch>

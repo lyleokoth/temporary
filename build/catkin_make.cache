@@ -1,0 +1,2 @@
+oryksbot_control:oryksbot_description:oryksbot_gazebo:oryksbot_mapping:oryksbot_navigation:rplidar_ros
+-DCATKIN_DEVEL_PREFIX=/home/lyle/oryks_ws/devel -DCMAKE_INSTALL_PREFIX=/home/lyle/oryks_ws/install -G Unix Makefiles

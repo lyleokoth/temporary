@@ -1,0 +1,8 @@
+prefix=/home/lyle/oryks_ws/install
+
+Name: oryksbot_mapping
+Description: Description of oryksbot_mapping
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

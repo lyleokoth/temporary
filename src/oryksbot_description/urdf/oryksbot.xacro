@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="oryksbot">
+
+    <xacro:include filename="$(find oryksbot_description)/urdf/oryksbot_properties.xacro"/>
+    <xacro:include filename="$(find oryksbot_description)/urdf/macros.xacro"/>
+    <xacro:include filename="$(find oryksbot_description)/urdf/materials.xacro"/>
+    <xacro:include filename="$(find oryksbot_description)/urdf/gazebo_properties.xacro"/>
+    <xacro:include filename="$(find oryksbot_description)/urdf/gazebo_plugins.xacro"/>
+    <xacro:include filename="$(find oryksbot_description)/urdf/gazebo_physics.xacro"/>
+    
+    <link name="base_footprint"/>
+
+    <joint name="base_joint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin xyz="0.0 0.0 ${base_height/2 + wheel_radius}" rpy="0 0 0"/>
+    </joint>
+
+    <!-- Robot Base --> 
+    <link name="base_link">
+        <visual>
+            <origin xyz="0.03 0 0" rpy="0 0 ${pi/2}"/>
+        <geometry> 
+            <mesh filename="package://oryksbot_description/meshes/base_link.STL" />
+        </geometry>
+            <material name="grey"/>
+        </visual>
+
+        <collision>
+        <geometry> 
+            <box size="${base_length} ${base_width} ${base_height}"/>
+        </geometry>
+        </collision>
+
+        <xacro:box_inertia m="${base_mass}" w="${base_width}" d="${base_length}" h="${base_height}"/>
+    </link>
+
+    <xacro:wheel prefix="left" x_reflect="-1" y_reflect="1" />
+    <xacro:wheel prefix="right" x_reflect="-1" y_reflect="-1" />
+
+    <link name="caster">
+      <visual>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 0"/> 
+        <geometry>
+          <mesh filename="package://oryksbot_description/meshes/caster_wheel.STL" />
+        </geometry>
+        <material name="light_black" />
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 0"/> 
+        <geometry>
+          <cylinder radius="${wheel_radius}" length="${wheel_tread}"/>
+        </geometry>
+      </collision>
+
+      <xacro:cylinder_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_tread}"/>
+    </link>
+
+    <joint name="caster_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="caster"/>
+      <origin xyz="${caster_x} 0.0 ${-base_height/2}" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="base_scan">
+        <visual>
+            <origin xyz="0 0 0.02" rpy="${pi/2} 0 ${pi}"/>
+            <geometry>
+                <mesh filename="package://oryksbot_description/meshes/lidar.STL" />
+            </geometry>
+            <material name="dark_grey"/>
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <cylinder length="${lidar_height}" radius="${lidar_radius}"/>
+            </geometry>
+        </collision>
+
+        <inertial>
+            <mass value="${lidar_mass}" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+                    iyy="0.001" iyz="0.0"
+                    izz="0.001" />
+        </inertial>
+    </link>  
+
+    <joint name="scan_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="base_scan"/>
+        <origin xyz="${lidar_x} 0 ${base_height/2 + lidar_height/2}" rpy="0 0 0"/>
+    </joint>    
+
+</robot>

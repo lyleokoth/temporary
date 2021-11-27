@@ -1,0 +1,8 @@
+prefix=/home/lyle/oryks_ws/devel
+
+Name: oryksbot_gazebo
+Description: Description of oryksbot_gazebo
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
